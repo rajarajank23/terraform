@@ -1,0 +1,186 @@
+
+   12  minikube start
+   13  minikube start --driver=docker
+ 
+   16  curl -fsSL https://get.docker.com/ | sh
+   17  sudo systemctl status docker
+   18  sudo usermod -a -G docker ubuntu
+   19  minikube start --driver=docker
+   20  newgrp docker
+   21  clear
+   22  ll
+   23  minikube start --driver=docker
+   24  minikube version
+   25  minikube status
+   26  history
+   27  kubectl get pods -A
+   28  ll
+   29  sudo kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+   30  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+   31  kubectl get pods -A
+   32  kubectl proxy
+   33  ssh -L localhost:8001:127.0.0.1:8001 ubuntu@15.206.148.62
+   34  mkdir ~/dashboard && cd ~/dashboard
+   35  sudo vi dashboard-admin.yaml
+   36  kubectl apply -f dashboard-admin.yaml
+   37  kubectl get secret -n kubernetes-dashboard $(kubectl get serviceaccount admin-user -n kubernetes-dashboard -o jsonpath="{.secret                      s[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+   38  kubectl get screts
+   39  ssh -L 8001:127.0.0.1:8001 ubuntu@15.206.148.62
+   40  ssh -L localhost:8001:172.31.12.221:8001 ubuntu@15.206.148.62
+   41  ll
+   42  sudo vi tomcat.pem
+   43  sudo chmod 400 tomcat.pem
+   44  ssh -i tomcat.pem ubuntu_of_instance1@i-00baaedd2a3f42d80 -L 8001:15.206.148.62:8001
+   45  sudo chmod 600 /home/ec2-user/.ssh/authorized_keys
+   46  sudo chmod 600 /home/ubuntu/.ssh/authorized_keys
+   47  ssh -L localhost:8001:127.0.0.1:8001 ubuntu@15.206.148.62
+   48  sudo chmod 755 /home
+   49  sudo chown ubuntu:ubuntu /home/ubuntu -R
+   50  sudo chmod 700 /home/ec2-user /home/ubuntu/.ssh
+   51  sudo chmod 700 /home/ubuntu/ /home/ubuntu/.ssh
+   52  sudo chmod 600 /home/ubuntu/.ssh/authorized_keys
+   53  ssh -L localhost:8001:127.0.0.1:8001 ubuntu@15.206.148.62
+   54  cd /var/log/
+   55  ll
+   56  cd
+   57  sudo ssh -L localhost:8001:127.0.0.1:8001 ubuntu@15.206.148.62
+   58  ll
+   59  kubectl get secret  $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base6                      4 --decode
+   60  kubectl get secret -n kubernetes-dashboard $(kubectl get serviceaccount admin-user -n kubernetes-dashboard -o jsonpath="{.secret                      s[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+   61  ll
+   62  sudo vi pod.yaml
+   63  kubectl create -f pod.yaml
+   64  kubectl get all
+   65  ll
+   66  kubectl get ingress -n kube-system
+   67  kubectl get service --all-namespaces
+   68  kubectl get pods -l app=nginx
+   69  sudo vi pod.yaml
+   70  sudo vi pod.yaml
+   71  ll
+   72  sudo vi service.yaml
+   73  kubectl apply -f service.yaml
+   74  kubectl get service nginx-service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+   75  kubectl get service service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+   76  kubectl get service -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+   77  ll
+   78  kubectl get services
+   79  kubectl get secret -n kubernetes-dashboard $(kubectl get serviceaccount read-only-user -n kubernetes-dashboard -o jsonpath="{.se                      crets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+   80  kubectl get secret -n kubernetes-dashboard $(kubectl get serviceaccount admin-user -n kubernetes-dashboard -o jsonpath="{.secret                      s[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+   81  kubectl get secret
+   82  ll
+   83  sudo vi service.yaml
+   84  kubectl apply -f service.yaml
+   85  kubectl apply -f service.yaml
+   86  sudo vi service.yaml
+   87  kubectl apply -f service.yaml
+   88  sudo vi service.yaml
+   89  kubectl apply -f service.yaml
+   90  curl 15.206.148.62 30080
+   91  vi pod.yaml
+   92  sudo vi pod.yaml
+   93  kubectl apply -f pod.yaml
+   94  sudo vi pod.yaml
+   95  kubectl apply -f pod.yaml
+   96  sudo vi pod.yaml
+   97  kubectl apply -f pod.yaml
+   98  kubectl apply
+   99  kubectl create --save-config
+  100  kubectl apply -f
+  101  kubectl apply
+  102  kubectl -f apply
+  103  kubectl apply -f
+  104  kubectl -k apply
+  105  kubectl --help
+  106  kubectl run
+  107  kubectl apply -f pod.yaml
+  108  sudo vi pod.yaml
+  109  kubectl apply -f pod.yaml
+  110  kubectl get pods
+  111  sudo vi pod.yaml
+  112  kubectl apply -f pod.yaml
+  113  sudo vi pod.yaml
+  114  kubectl apply -f pod.yaml
+  115  kubectl get pods
+  116  curl 15.206.148.62 30080
+  117  ll
+  118  curl 15.206.148.62 30081
+  119  kubectl describe services example-service
+  120  kubectl get services
+  121  kubectl get deployments
+  122  sudo vi pod.yaml
+  123  kubectl apply -f pod.yaml
+  124  sudo vi pod.yaml
+  125  kubectl apply -f pod.yaml
+  126  sudo vi pod.yaml
+  127  kubectl apply -f pod.yaml
+  128  kubectl describe services pod
+  129  kubectl describe service example-service
+  130  kubectl describe services example-service
+  131  curl 172.31.12.221 30081
+  132  curl 127.0.01 30081
+  133  curl 127.0.01 80
+  134  sudo vi pod.yaml
+  135  kubectl apply -f pod.yaml
+  136  kubectl get replicasets
+  137  kubectl describe replicasets
+  138  cat pod.yaml
+  139  kubectl get services my-service
+  140  kubectl get services pod.yaml
+  141  kubectl get pods --output=wide
+  142  curl http://15.206.148.62 30081
+  143  curl http://15.206.148.62:30081
+  144  kubectl get nodes -o wide
+  145  kubectl get pods --all-namespaces
+  146  kubectl get services --all-namespaces
+  147  kubectl get services --all-namespaces --wide
+  148  kubectl get services --all-namespaces -o wide
+  149  ll
+  150  git clone https://github.com/irsols-devops/kubernetes-dashboard.git
+  151  ll
+  152  cd dashboard/
+  153  ll
+  154  cat dashboard-admin.yaml
+  155  cd ..
+  156  ll
+  157  rm -rf dashboard/
+  158  ll
+  159  kubectl get service nginx-service
+  160  kubectl -n nginx-service svc
+  161  kubectl -n nginx-service get pods -o wide
+  162  kubectl get pods
+  163  kubectl -n nginx-deployment get pods -o wide
+  164  kubectl -n kubernetes-dashboard get pods -o wide
+  165*
+  166  kubectl -n kubernetes-dashboard get pods svc
+  167  kubectl -n kubernetes-dashboard get svc
+  168  kubectl -n kubernetes-dashboard edit svc kubernetes-dashboard
+  169  kubectl -n kubernetes-dashboard get svc
+  170  history
+
+kubectl get deployments nginx-deployment
+  130  kubectl describe deployments nginx-deployment
+  131  kubectl expose deployment nginx-deployment --port=30081 --target-port=80 --type=LoadBalancer
+  132  kubectl describe deployments nginx-deployment
+  133  kubectl describe service nginx-deployment
+
+kubectl -n kubernetes-dashboard edit svc kubernetes-dashboard
+
+ssh tunnel cmd
+
+ssh -i ~/.ssh/tomcat.pem -L 8081:localhost:37217 ubuntu@13.235.113.220(important)
+
+kubectl delete svc apache-service
+
+kubectl get svc
+
+kubectl delete service nginx-deployment
+
+kubectl get svc -n kubernetes-dashboard
+
+ kubectl create namespace apache-service
+ kubectl get namespaces
+kubectl delete ingress service-ingress -n apache-service
+
+minikube addons enable ingress
+

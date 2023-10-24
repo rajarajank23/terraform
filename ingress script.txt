@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  namespace: apache-service
+spec:
+  rules:
+  - host: minikube.rithvik.shop
+    http:
+      paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: apache-service
+              port:
+                number: 80

@@ -1,0 +1,97 @@
+https://www.linkedin.com/pulse/those-who-all-currently-facing-issue-kubeadm-ubuntu-server-patidar
+
+
+https://www.linkedin.com/pulse/how-can-i-do-security-testing-kubernetes-architecture-vartul-goyal
+
+
+
+
+swapoff -a
+
+Now setup the bridge for IPV4 on all nodes:
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+# sysctl params required by setup, params persist across reboots
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+
+# Apply sysctl params without reboot
+sudo sysctl --system
+
+Now we will install all required packages on all nodes one by one, starting from the master node.
+
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+
+
+New
+- > /etc/apt/sources.list.d/kubernetes.list
+- apt update
+- curl -fsSL "https://packages.cloud.google.com/apt/doc/apt-key.gpg" | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/kubernetes-archive-keyring.gpg
+- echo 'deb https://packages.cloud.google.com/apt kubernetes-xenial main' > /etc/apt/sources.list.d/kubernetes.list
+- sudo apt update -y
+- sudo apt install kubeadm=1.20.0-00 kubectl=1.20.0-00 kubelet=1.20.0-00 -y
+- apt install docker.io -y
+
+Update apt package index, install kubelet, kubeadm, kubectl and docker.io, and pin their version:
+
+
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl docker.io
+sudo apt-mark hold kubelet kubeadm kubectl
+
+Now initialize kubeadm
+
+kubeadm init --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=all(Below directroies needs to create)
+
+
+Now run below command on master node
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Setup Calico SDN
+
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
+
+curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml -O
+
+kubectl create -f custom-resources.yaml
+
+Note if you are using 192.168.0.0/16 then you can proceed with the above command otherwise you need to provide the IPs which were used during, kubeadm init –pod-network-cidr=x.x.x.x/16
+
+Now Setup Workers by running all steps till step 5
+
+Now run the below command on the worker node
+
+kubeadm join 10.0.0.2:6443 --token ndi3ae.ujwfcuais8zm2cyn --discovery-token-ca-cert-hash sha256:fc6c1094159833bf95a3fcb7d49960026e4ddad56f8648b94240cd1c867b2f6b
+
+root@masternode:~# kubectl get no
+NAME         STATUS     ROLES                  AGE     VERSION
+masternode   NotReady   control-plane,master   9m49s   v1.20.0
+
+root@masternode:~# kubectl get po -A
+NAMESPACE         NAME                                 READY   STATUS    RESTARTS   AGE
+kube-system       coredns-74ff55c5b-s7txs              0/1     Pending   0          11m
+kube-system       coredns-74ff55c5b-t8s2n              0/1     Pending   0          11m
+kube-system       etcd-masternode                      1/1     Running   0          11m
+kube-system       kube-apiserver-masternode            1/1     Running   0          11m
+kube-system       kube-controller-manager-masternode   1/1     Running   0          11m
+kube-system       kube-proxy-x9xbt                     1/1     Running   0          11m
+kube-system       kube-scheduler-masternode            1/1     Running   0          11m
+tigera-operator   tigera-operator-cffd8458f-crsgn      1/1     Running   0          4m21s
+
+
+
+

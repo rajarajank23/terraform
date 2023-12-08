@@ -5,7 +5,9 @@ https://opensourceeducation.net/kubernetes-cluster-installation-using-kubeadm
 https://www.linkedin.com/pulse/how-can-i-do-security-testing-kubernetes-architecture-vartul-goyal
 
 
+https://www.youtube.com/watch?v=lYHUKk7Ny7U
 
+https://www.fosstechnix.com/kubernetes-cluster-using-kubeadm-on-ubuntu-22/
 
 swapoff -a
 

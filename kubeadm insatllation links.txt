@@ -1,5 +1,6 @@
 https://www.linkedin.com/pulse/those-who-all-currently-facing-issue-kubeadm-ubuntu-server-patidar
 
+https://opensourceeducation.net/kubernetes-cluster-installation-using-kubeadm
 
 https://www.linkedin.com/pulse/how-can-i-do-security-testing-kubernetes-architecture-vartul-goyal
 
